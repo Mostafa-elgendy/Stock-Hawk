@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     @Override
                     public void onItemClick(View v, int position) {
                         String symbol = ((TextView) v.findViewById(R.id.stock_symbol)).getText().toString();
-                        //     Intent intent = new Intent(mContext, LineGraphActivity.class);
-                        //   intent.putExtra("symbol", symbol);
-                        // startActivity(intent);
+                        Intent intent = new Intent(mContext, GraphActivity.class);
+                        intent.putExtra("symbol", symbol);
+                        startActivity(intent);
                     }
                 }));
         mCursorAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {

@@ -26,20 +26,22 @@
         </activity>
 
         <service
-            android:name="com.mostafa.stock_hawk.service.StockTaskService"
+            android:name=".service.StockTaskService"
             android:exported="true"
             android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
             <intent-filter>
                 <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
             </intent-filter>
         </service>
-        <service android:name="com.mostafa.stock_hawk.service.StockIntentService" />
+        <service android:name=".service.StockIntentService" />
 
         <provider
             android:name=".data.generated.QuoteProvider"
             android:authorities="com.mostafa.stock_hawk.QuoteProvider"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".ui.GraphActivity"></activity>
     </application>
 
 </manifest>
