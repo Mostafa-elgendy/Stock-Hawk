@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <string name="pref_stocks_key">اسهم</string>
+
+
+    <string name="pref_display_mode_key">وضع العرض</string>
+    <string name="pref_display_mode_default">@string/pref_display_mode_percentage_key</string>
+
+    <string name="pref_display_mode_absolute_key">مطلق</string>
+    <string name="pref_display_mode_percentage_key">نسبة مئوية</string>
+    <string name="direction">rtl</string>
+
+    <string name="action_change_units">@string/pref_display_mode_key</string>
+
+
+    <string name="dialog_title">اضافة سهم</string>
+    <string name="dialog_hint">رمز (e.g. GOOG)</string>
+    <string name="dialog_cancel">إلغاء</string>
+    <string name="dialog_add">اضافة</string>
+
+    <string name="error_no_network">ﻻ توجدأي شبكة اتصال! سيتم تحميل الأسهم عندما تتوفر الشبكة</string>
+    <string name="error_no_stocks">ﻻ يوجد اسهم! اضغط على الزر  باﻷسفل لإضافة واحد</string>
+
+    <string name="toast_stock_added_no_connectivity">رمز %s تم اضافته . سوف يتم التحديث عند وجود الشبكة</string>
+    <string name="toast_no_connectivity">سوف يتم التحديث عند وجود الشبكة</string>
+
+</resources>
