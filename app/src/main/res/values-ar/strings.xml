@@ -15,6 +15,19 @@
 
     <string name="action_change_units">@string/pref_display_mode_key</string>
 
+    <string name="symbol_search">رمز البحـث</string>
+    <string name="already_saved">هذا السهم موجود بالفعل !</string>
+    <string name="network_toast">لتشغيل هذا التطبيق  ﻻبد من الإتصال بشبكة المعلومات</string>
+    <string name="none_selected">قم بالضغط على زرار + لإضافة سهم</string>
+    <string name="app_offline">ﻻيجود اتصال بشكبه المعلومات - وارد ان تكون البيانات غير محدثة </string>
+    <string name="invalid_symbol">رمز سهم غير صحيح</string>
+    <string name="cd_add">أضافة سهم</string>
+    <string name="loading">جارى التحميل ....</string>
+    <string name="error">خطأ</string>
+    <string name="loading_failed">هناك خطأ-  حاول التأكد من وجود اتصال بشبكة المعلوامات ... </string>
+
+
+    <string name="content_test">البحث عن سهم معين</string>
 
     <string name="dialog_title">اضافة سهم</string>
     <string name="dialog_hint">رمز (e.g. GOOG)</string>

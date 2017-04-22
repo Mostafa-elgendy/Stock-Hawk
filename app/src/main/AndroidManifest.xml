@@ -7,13 +7,9 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.google.android.gcm.demo.permission.C2D_MESSAGE" />
 
-    <permission
-        android:name="com.google.android.gcm.demo.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/stock"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -41,7 +37,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ui.GraphActivity"></activity>
+        <activity android:name=".ui.GraphActivity" />
     </application>
 
 </manifest>
