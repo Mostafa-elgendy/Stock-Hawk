@@ -25,7 +25,7 @@
     <string name="loading">جارى التحميل ....</string>
     <string name="error">خطأ</string>
     <string name="loading_failed">هناك خطأ-  حاول التأكد من وجود اتصال بشبكة المعلوامات ... </string>
-
+    <string name="empty_list">ﻻ توجد معلومات للعرض - من فضلك انتظر</string>
 
     <string name="content_test">البحث عن سهم معين</string>
 

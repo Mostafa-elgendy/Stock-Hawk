@@ -31,15 +31,6 @@
     <string name="default_stocks_microsoft" translatable="false">MSFT</string>
     <string name="default_stocks_facebook" translatable="false">FB</string>
 
-    <string name="tab_1_week" translatable="false">1W</string>
-    <string name="tab_1_month" translatable="false">1M</string>
-    <string name="tab_3_months" translatable="false">3M</string>
-    <string name="tab_6_months" translatable="false">6M</string>
-    <string name="tab_1_year" translatable="false">YEAR</string>
-    <string name="desc_tab_1_month">stock graph for 1 month</string>
-    <string name="desc_tab_3_months">stock graph for 3 month</string>
-    <string name="desc_tab_6_months">stock graph for 6 month</string>
-    <string name="desc_tab_1_year">stock graph for all time</string>
     <string name="action_change_units">@string/pref_display_mode_key</string>
     <string name="tv_stock_history">tap a graph</string>
 
@@ -56,5 +47,7 @@
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
     <string name="empty_list">List is Empty - No data to preview.</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

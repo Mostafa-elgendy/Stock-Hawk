@@ -167,14 +167,14 @@ public class GraphActivity extends AppCompatActivity {
                     entries.add(new Entry(values.get(i), i));
                 }
 
-                LineDataSet dataset = new LineDataSet(entries, "Data");
+                LineDataSet dataset = new LineDataSet(entries, "Stocks Distribution");
                 dataset.setDrawCubic(true);
                 dataset.setDrawFilled(true);
 
                 LineData data = new LineData(labels, dataset);
                 mChart.setData(data);
                 mChart.animateY(5000);
-                mChart.setDescription("your data");
+                mChart.setDescription("Stocks Distribution");
 
             }
         });
