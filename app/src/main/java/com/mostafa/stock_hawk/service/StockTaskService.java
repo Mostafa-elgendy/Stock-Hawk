@@ -29,14 +29,14 @@ public class StockTaskService extends GcmTaskService{
   private String LOG_TAG = StockTaskService.class.getSimpleName();
 
   private OkHttpClient client = new OkHttpClient();
-  private Context mContext;
-  private StringBuilder mStoredSymbols = new StringBuilder();
+  private Context context;
+  private StringBuilder storedSymbols = new StringBuilder();
   private boolean isUpdate;
 
   public StockTaskService(){}
 
   public StockTaskService(Context context){
-    mContext = context;
+    this.context = context;
   }
   String fetchData(String url) throws IOException{
     Request request = new Request.Builder()
@@ -50,8 +50,8 @@ public class StockTaskService extends GcmTaskService{
   @Override
   public int onRunTask(TaskParams params){
     Cursor initQueryCursor;
-    if (mContext == null){
-      mContext = this;
+    if (context == null) {
+      context = this;
     }
     StringBuilder urlStringBuilder = new StringBuilder();
     try{
@@ -64,7 +64,7 @@ public class StockTaskService extends GcmTaskService{
     }
     if (params.getTag().equals("init") || params.getTag().equals("periodic")){
       isUpdate = true;
-      initQueryCursor = mContext.getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
+      initQueryCursor = context.getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
           new String[] { "Distinct " + QuoteColumns.SYMBOL }, null,
           null, null);
       if (initQueryCursor.getCount() == 0 || initQueryCursor == null){
@@ -79,13 +79,13 @@ public class StockTaskService extends GcmTaskService{
         DatabaseUtils.dumpCursor(initQueryCursor);
         initQueryCursor.moveToFirst();
         for (int i = 0; i < initQueryCursor.getCount(); i++){
-          mStoredSymbols.append("\""+
+          storedSymbols.append("\"" +
               initQueryCursor.getString(initQueryCursor.getColumnIndex("symbol"))+"\",");
           initQueryCursor.moveToNext();
         }
-        mStoredSymbols.replace(mStoredSymbols.length() - 1, mStoredSymbols.length(), ")");
+        storedSymbols.replace(storedSymbols.length() - 1, storedSymbols.length(), ")");
         try {
-          urlStringBuilder.append(URLEncoder.encode(mStoredSymbols.toString(), "UTF-8"));
+          urlStringBuilder.append(URLEncoder.encode(storedSymbols.toString(), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
           e.printStackTrace();
         }
@@ -118,10 +118,10 @@ public class StockTaskService extends GcmTaskService{
           // update ISCURRENT to 0 (false) so new data is current
           if (isUpdate){
             contentValues.put(QuoteColumns.ISCURRENT, 0);
-            mContext.getContentResolver().update(QuoteProvider.Quotes.CONTENT_URI, contentValues,
+            context.getContentResolver().update(QuoteProvider.Quotes.CONTENT_URI, contentValues,
                 null, null);
           }
-          mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
+          context.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
               Utils.quoteJsonToContentVals(getResponse));
         }catch (RemoteException | OperationApplicationException e){
           Log.e(LOG_TAG, "Error applying batch insert", e);

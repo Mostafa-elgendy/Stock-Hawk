@@ -11,35 +11,35 @@ import android.support.v7.widget.RecyclerView;
 
 public abstract class CursorRecyclerViewAdapter <VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>{
   private static final String LOG_TAG = CursorRecyclerViewAdapter.class.getSimpleName();
-  private Cursor mCursor;
+  private Cursor cursor;
   private boolean dataIsValid;
   private int rowIdColumn;
-  private DataSetObserver mDataSetObserver;
+  private DataSetObserver dataSetObserver;
   public CursorRecyclerViewAdapter(Context context, Cursor cursor){
-    mCursor = cursor;
+    this.cursor = cursor;
     dataIsValid = cursor != null;
-    rowIdColumn = dataIsValid ? mCursor.getColumnIndex("_id") : -1;
-    mDataSetObserver = new NotifyingDataSetObserver();
+    rowIdColumn = dataIsValid ? this.cursor.getColumnIndex("_id") : -1;
+    dataSetObserver = new NotifyingDataSetObserver();
     if (dataIsValid){
-      mCursor.registerDataSetObserver(mDataSetObserver);
+      this.cursor.registerDataSetObserver(dataSetObserver);
     }
   }
 
   public Cursor getCursor(){
-    return mCursor;
+    return cursor;
   }
 
   @Override
   public int getItemCount(){
-    if (dataIsValid && mCursor != null){
-      return mCursor.getCount();
+    if (dataIsValid && cursor != null) {
+      return cursor.getCount();
     }
     return 0;
   }
 
   @Override public long getItemId(int position) {
-    if (dataIsValid && mCursor != null && mCursor.moveToPosition(position)){
-      return mCursor.getLong(rowIdColumn);
+    if (dataIsValid && cursor != null && cursor.moveToPosition(position)) {
+      return cursor.getLong(rowIdColumn);
     }
     return 0;
   }
@@ -55,25 +55,25 @@ public abstract class CursorRecyclerViewAdapter <VH extends RecyclerView.ViewHol
     if (!dataIsValid){
       throw new IllegalStateException("This should only be called when Cursor is valid");
     }
-    if (!mCursor.moveToPosition(position)){
+    if (!cursor.moveToPosition(position)) {
       throw new IllegalStateException("Could not move Cursor to position: " + position);
     }
 
-    onBindViewHolder(viewHolder, mCursor);
+    onBindViewHolder(viewHolder, cursor);
   }
 
   public Cursor swapCursor(Cursor newCursor){
-    if (newCursor == mCursor){
+    if (newCursor == cursor) {
       return null;
     }
-    final Cursor oldCursor = mCursor;
-    if (oldCursor != null && mDataSetObserver != null){
-      oldCursor.unregisterDataSetObserver(mDataSetObserver);
+    final Cursor oldCursor = cursor;
+    if (oldCursor != null && dataSetObserver != null) {
+      oldCursor.unregisterDataSetObserver(dataSetObserver);
     }
-    mCursor = newCursor;
-    if (mCursor != null){
-      if (mDataSetObserver != null){
-        mCursor.registerDataSetObserver(mDataSetObserver);
+    cursor = newCursor;
+    if (cursor != null) {
+      if (dataSetObserver != null) {
+        cursor.registerDataSetObserver(dataSetObserver);
       }
       rowIdColumn = newCursor.getColumnIndexOrThrow("_id");
       dataIsValid = true;

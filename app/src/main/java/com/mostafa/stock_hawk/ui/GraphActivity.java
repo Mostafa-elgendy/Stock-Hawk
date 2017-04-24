@@ -26,10 +26,13 @@ import java.util.ArrayList;
 
 public class GraphActivity extends AppCompatActivity {
 
+    private final String COMPANY_NAME = "company_name";
+    private final String SYMBOL = "symbol";
+    private final String VALUES = "values";
+    private final String LABELS = "labels";
     private View errorMessage;
     private View progressCircle;
-    private LineChart mChart;
-
+    private LineChart lineChart;
     private boolean isLoaded = false;
     private String companySymbol;
     private String companyName;
@@ -46,8 +49,8 @@ public class GraphActivity extends AppCompatActivity {
         errorMessage = findViewById(R.id.error_message);
         progressCircle = findViewById(R.id.progress_circle);
 
-        mChart = (LineChart) findViewById(R.id.chart1);
-        companySymbol = getIntent().getStringExtra("symbol");
+        lineChart = (LineChart) findViewById(R.id.chart1);
+        companySymbol = getIntent().getStringExtra(SYMBOL);
         if (savedInstanceState == null) {
             downloadStockDetails();
         }
@@ -58,31 +61,31 @@ public class GraphActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (isLoaded) {
-            outState.putString("company_name", companyName);
-            outState.putStringArrayList("labels", labels);
+            outState.putString(COMPANY_NAME, companyName);
+            outState.putStringArrayList(LABELS, labels);
 
             float[] valuesArray = new float[values.size()];
             for (int i = 0; i < valuesArray.length; i++) {
                 valuesArray[i] = values.get(i);
             }
-            outState.putFloatArray("values", valuesArray);
+            outState.putFloatArray(VALUES, valuesArray);
         }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        if (savedInstanceState != null && savedInstanceState.containsKey("company_name")) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(COMPANY_NAME)) {
             isLoaded = true;
 
-            companyName = savedInstanceState.getString("company_name");
-            labels = savedInstanceState.getStringArrayList("labels");
+            companyName = savedInstanceState.getString(COMPANY_NAME);
+            labels = savedInstanceState.getStringArrayList(LABELS);
             values = new ArrayList<>();
 
-            float[] valuesArray = savedInstanceState.getFloatArray("values");
+            float[] valuesArray = savedInstanceState.getFloatArray(VALUES);
             for (float f : valuesArray) {
                 values.add(f);
             }
-            onDownloadCompleted();
+            // onDownloadCompleted();
         }
         super.onRestoreInstanceState(savedInstanceState);
     }
@@ -167,14 +170,14 @@ public class GraphActivity extends AppCompatActivity {
                     entries.add(new Entry(values.get(i), i));
                 }
 
-                LineDataSet dataset = new LineDataSet(entries, "Stocks Distribution");
+                LineDataSet dataset = new LineDataSet(entries, getResources().getString(R.string.stock_distribution));
                 dataset.setDrawCubic(true);
                 dataset.setDrawFilled(true);
 
                 LineData data = new LineData(labels, dataset);
-                mChart.setData(data);
-                mChart.animateY(5000);
-                mChart.setDescription("Stocks Distribution");
+                lineChart.setData(data);
+                lineChart.animateY(5000);
+                lineChart.setDescription(getResources().getString(R.string.stock_distribution));
 
             }
         });
@@ -184,7 +187,7 @@ public class GraphActivity extends AppCompatActivity {
         GraphActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mChart.setVisibility(View.GONE);
+                lineChart.setVisibility(View.GONE);
                 progressCircle.setVisibility(View.GONE);
                 errorMessage.setVisibility(View.VISIBLE);
                 setTitle(R.string.error);

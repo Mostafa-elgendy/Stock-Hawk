@@ -25,14 +25,17 @@
 
     <string name="pref_display_mode_absolute_key">absolute</string>
     <string name="pref_display_mode_percentage_key">percentage</string>
+    <string name="stock_distribution">Stocks Distribution</string>
 
     <string name="default_stocks_yahoo" translatable="false">YHOO</string>
     <string name="default_stocks_apple" translatable="false">AAPL</string>
     <string name="default_stocks_microsoft" translatable="false">MSFT</string>
     <string name="default_stocks_facebook" translatable="false">FB</string>
+    <string name="stock_saved">Stock Saved Successfully</string>
 
     <string name="action_change_units">@string/pref_display_mode_key</string>
     <string name="tv_stock_history">tap a graph</string>
+
 
     <string name="direction">ltr</string>
 

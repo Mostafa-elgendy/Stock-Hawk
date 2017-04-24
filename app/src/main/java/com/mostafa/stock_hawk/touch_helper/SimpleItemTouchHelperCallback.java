@@ -8,11 +8,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
  * this class enables swipe to delete in RecyclerView
  */
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
-  private final ItemTouchHelperAdapter mAdapter;
   public static final float ALPHA_FULL = 1.0f;
+  private final ItemTouchHelperAdapter adapter;
 
   public SimpleItemTouchHelperCallback(ItemTouchHelperAdapter adapter){
-    mAdapter = adapter;
+    this.adapter = adapter;
   }
 
   @Override
@@ -34,7 +34,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
 
   @Override
   public void onSwiped(RecyclerView.ViewHolder viewHolder, int i){
-    mAdapter.onItemDismiss(viewHolder.getAdapterPosition());
+    adapter.onItemDismiss(viewHolder.getAdapterPosition());
   }
 
 

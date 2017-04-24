@@ -24,17 +24,17 @@ import com.mostafa.stock_hawk.touch_helper.ItemTouchHelperViewHolder;
 public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAdapter.ViewHolder>
     implements ItemTouchHelperAdapter{
 
-  private static Context mContext;
+  private static Context context;
   private static Typeface robotoLight;
   private boolean isPercent;
   public QuoteCursorAdapter(Context context, Cursor cursor){
     super(context, cursor);
-    mContext = context;
+    this.context = context;
   }
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-    robotoLight = Typeface.createFromAsset(mContext.getAssets(), "fonts/Roboto-Light.ttf");
+    robotoLight = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
     View itemView = LayoutInflater.from(parent.getContext())
         .inflate(R.layout.list_item_quote, parent, false);
     ViewHolder vh = new ViewHolder(itemView);
@@ -49,18 +49,18 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
     if (cursor.getInt(cursor.getColumnIndex("is_up")) == 1){
       if (sdk < Build.VERSION_CODES.JELLY_BEAN){
         viewHolder.change.setBackgroundDrawable(
-            mContext.getResources().getDrawable(R.drawable.percent_change_pill_green));
+                context.getResources().getDrawable(R.drawable.percent_change_pill_green));
       }else {
         viewHolder.change.setBackground(
-            mContext.getResources().getDrawable(R.drawable.percent_change_pill_green));
+                context.getResources().getDrawable(R.drawable.percent_change_pill_green));
       }
     } else{
       if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
         viewHolder.change.setBackgroundDrawable(
-            mContext.getResources().getDrawable(R.drawable.percent_change_pill_red));
+                context.getResources().getDrawable(R.drawable.percent_change_pill_red));
       } else{
         viewHolder.change.setBackground(
-            mContext.getResources().getDrawable(R.drawable.percent_change_pill_red));
+                context.getResources().getDrawable(R.drawable.percent_change_pill_red));
       }
     }
     if (Utils.showPercent){
@@ -74,7 +74,7 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
     Cursor c = getCursor();
     c.moveToPosition(position);
     String symbol = c.getString(c.getColumnIndex(QuoteColumns.SYMBOL));
-    mContext.getContentResolver().delete(QuoteProvider.Quotes.withSymbol(symbol), null, null);
+    context.getContentResolver().delete(QuoteProvider.Quotes.withSymbol(symbol), null, null);
     notifyItemRemoved(position);
   }
 

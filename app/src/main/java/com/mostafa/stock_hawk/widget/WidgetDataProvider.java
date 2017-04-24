@@ -19,17 +19,17 @@ import com.mostafa.stock_hawk.data.QuoteProvider;
 public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory {
     Context context;
     Intent intent;
-    private Cursor mCursor;
-    private int mAppWidgetId;
+    private Cursor cursor;
+    private int appWidgetId;
 
     public WidgetDataProvider(Context context, Intent intent) {
         this.context = context;
         this.intent = intent;
-        mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
-    //private Cursor mCursor;
+    //private Cursor cursor;
     public void onCreate() {
         // Since we reload the cursor in onDataSetChanged() which gets called immediately after
         // onCreate(), we do nothing here.
@@ -37,13 +37,13 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     }
 
     public void onDestroy() {
-        if (mCursor != null) {
-            mCursor.close();
+        if (cursor != null) {
+            cursor.close();
         }
     }
 
     public int getCount() {
-        return mCursor.getCount();
+        return cursor.getCount();
     }
 
     public RemoteViews getViewAt(int position) {
@@ -52,16 +52,16 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         String bidPrice = "";
         String change = "";
         int isUp = 1;
-        if (mCursor.moveToPosition(position)) {
+        if (cursor.moveToPosition(position)) {
             Log.e("enter", "enter");
-            final int symbolColIndex = mCursor.getColumnIndex(QuoteColumns.SYMBOL);
-            final int bidPriceColIndex = mCursor.getColumnIndex(QuoteColumns.BIDPRICE);
-            final int changeColIndex = mCursor.getColumnIndex(QuoteColumns.PERCENT_CHANGE);
-            final int isUpIndex = mCursor.getColumnIndex(QuoteColumns.ISUP);
-            symbol = mCursor.getString(symbolColIndex);
-            bidPrice = mCursor.getString(bidPriceColIndex);
-            change = mCursor.getString(changeColIndex);
-            isUp = mCursor.getInt(isUpIndex);
+            final int symbolColIndex = cursor.getColumnIndex(QuoteColumns.SYMBOL);
+            final int bidPriceColIndex = cursor.getColumnIndex(QuoteColumns.BIDPRICE);
+            final int changeColIndex = cursor.getColumnIndex(QuoteColumns.PERCENT_CHANGE);
+            final int isUpIndex = cursor.getColumnIndex(QuoteColumns.ISUP);
+            symbol = cursor.getString(symbolColIndex);
+            bidPrice = cursor.getString(bidPriceColIndex);
+            change = cursor.getString(changeColIndex);
+            isUp = cursor.getInt(isUpIndex);
             Log.e("enter", "enter" + symbol);
         }
 
@@ -104,10 +104,10 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     }
 
     private void initData() {
-        if (mCursor != null) {
-            mCursor.close();
+        if (cursor != null) {
+            cursor.close();
         }
-        mCursor = context.getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
+        cursor = context.getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
                 new String[]{QuoteColumns._ID, QuoteColumns.SYMBOL, QuoteColumns.BIDPRICE,
                         QuoteColumns.PERCENT_CHANGE, QuoteColumns.CHANGE, QuoteColumns.ISUP},
                 QuoteColumns.ISCURRENT + " = ?",
