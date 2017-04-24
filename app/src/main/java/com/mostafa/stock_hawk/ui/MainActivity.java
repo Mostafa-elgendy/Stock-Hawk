@@ -15,7 +15,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -107,20 +106,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                                             new String[]{input.toString().toUpperCase()}, null);
 
                                     if (c.getCount() > 0) {
-                                        Log.e(" Data : ", "data: " + c.getCount());
-                                        c.moveToNext();
+                                        String symbol = input.toString().toUpperCase();
+                                        Intent intent = new Intent(mContext, GraphActivity.class);
+                                        intent.putExtra("symbol", symbol);
+                                        startActivity(intent);
 
-                                        Log.e(" Data : ", "data: " + c.getString(1) + " " + c.getString(2));
-                                        //   String symbol = c.getString(c.getColumnIndex(QuoteColumns.SYMBOL));
-                                        // Intent intent = new Intent(mContext, GraphActivity.class);
-                                        //intent.putExtra("symbol", symbol);
-                                        //startActivity(intent);
-                                        /*Toast toast =
-                                                Toast.makeText(MainActivity.this, R.string.already_saved,
-                                                        Toast.LENGTH_LONG);
-                                        toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
-                                        toast.show();
-                                        return;*/
                                     } else {
                                         // Add the stock to DB
                                         mServiceIntent.putExtra("tag", "add");
