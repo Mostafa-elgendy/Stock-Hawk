@@ -39,7 +39,7 @@ public class GraphActivity extends AppCompatActivity {
     private ArrayList<String> labels;
     private ArrayList<Float> values;
 
-    // Activity life cycle
+    // Graph Activity life cycle
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
