@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:gravity="center_vertical"
+    android:layoutDirection="locale"
     android:orientation="horizontal"
     android:paddingEnd="16dp"
     android:paddingLeft="16dp"
@@ -19,6 +20,7 @@
         tools:text="GOOG" />
 
     <LinearLayout
+        android:id="@+id/header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

@@ -17,6 +17,8 @@ import com.mostafa.stock_hawk.data.QuoteProvider;
  */
 
 public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory {
+
+
     Context context;
     Intent intent;
     private Cursor cursor;
